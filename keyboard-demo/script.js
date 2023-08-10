@@ -1,6 +1,7 @@
 const pianoKeys = document.querySelectorAll(".piano-keys .key"),
 volumeSlider = document.querySelector(".volume-slider input"),
 keysCheckbox = document.querySelector(".keys-checkbox input");
+octavesCheckbox = document.querySelector(".octaves-checkbox input");
 
 let allKeys = [],
 audio = new Audio(`tunes/a.wav`); // by default, audio src is "a" tune
@@ -31,11 +32,16 @@ const showHideKeys = () => {
     pianoKeys.forEach(key => key.classList.toggle("hide"));
 }
 
+const toggleSecondOctave = () => {
+
+}
+
 const pressedKey = (e) => {
     // if the pressed key is in the allKeys array, only call the playTune function
     if(allKeys.includes(e.key)) playTune(e.key);
 }
 
 keysCheckbox.addEventListener("click", showHideKeys);
+octavesCheckbox.addEventListener("click", toggleSecondOctave);
 volumeSlider.addEventListener("input", handleVolume);
 document.addEventListener("keydown", pressedKey);

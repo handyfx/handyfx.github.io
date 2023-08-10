@@ -67,6 +67,30 @@ header input {
   left: 35px;
   background: #fff;
 }
+.octaves-checkbox input {
+  height: 30px;
+  width: 60px;
+  cursor: pointer;
+  appearance: none;
+  position: relative;
+  background: #4B4B4B
+}
+.octaves-checkbox input::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 5px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #8c8c8c;
+  transform: translateY(-50%);
+  transition: all 0.3s ease;
+}
+.octaves-checkbox input:checked::before {
+  left: 35px;
+  background: #fff;
+}
 .piano-keys {
   display: flex;
   list-style: none;
@@ -93,7 +117,8 @@ header input {
 .piano-keys .white {
   height: 230px;
   width: 70px;
-  border-radius: 8px;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
   border: 1px solid #000;
   background: linear-gradient(#fff 96%, #eee 4%);
 }
