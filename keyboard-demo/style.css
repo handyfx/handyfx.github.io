@@ -34,6 +34,7 @@ header .column {
 header span {
   font-weight: 500;
   margin-right: 15px;
+  margin-left: 15px;
   font-size: 1.19rem;
 }
 header input {
@@ -100,7 +101,7 @@ header input {
   cursor: pointer;
   user-select: none;
   position: relative;
-  text-transform: uppercase;
+  /* text-transform: uppercase; */
 }
 .piano-keys .black {
   z-index: 2;
@@ -135,6 +136,9 @@ header input {
   text-align: center;
 }
 .piano-keys .key.hide span {
+  display: none;
+}
+.piano-keys .key.remove {
   display: none;
 }
 .piano-keys .black span {
