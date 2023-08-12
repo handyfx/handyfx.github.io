@@ -1,62 +1,98 @@
 <!DOCTYPE html>
 <!-- Coding By CodingNepal - youtube.com/codingnepal -->
 <html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>Playable Piano JavaScript | CodingNepal</title>
-    <link rel="stylesheet" href="style.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<script src="https://unpkg.com/tone"></script>
-    <script src="script.js" defer></script>
-  </head>
-  <body>
-    <div class="wrapper">
-      <header>
-        <!-- <div class="column volume-slider">
+
+<head>
+  <meta charset="utf-8">
+  <title>Playable Piano JavaScript | CodingNepal</title>
+  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://unpkg.com/tone"></script>
+  <script src="script.js" defer></script>
+</head>
+
+<body>
+  <div class="wrapper">
+    <header>
+      <!-- <div class="column volume-slider">
           <span>Volume</span><input type="range" min="0" max="1" value="0.5" step="any">
         </div> -->
-        <div class="column keys-checkbox">
-          <span>Show Keys</span><input type="checkbox" checked>
-        </div>
-        <div class="column notation-selection">
-          <span>Notation</span>
-          <select name="notation" id="notation">
-            <option value="letters">Letters</option>
-            <option value="scale-degree">Scale Degree</option>
-            <option value="solfege">Solfege</option>
-          </select>
-        </div>
-        <div class="column octaves-checkbox">
-          <span>2 Octaves</span><input type="checkbox" checked>
-        </div>
-      </header>
-      <ul class="piano-keys">
-        <li id="key1" class="key white" data-key='C4'><span>C</span></li>
-        <li id="key2" class="key black" data-key='C#4'><span>C&sharp; D&flat;</span></li>
-        <li id="key3" class="key white" data-key='D4'><span>D</span></li>
-        <li id="key4" class="key black" data-key='D#4'><span>D&sharp; E&flat;</span></li>
-        <li id="key5" class="key white" data-key='E4'><span>E</span></li>
-        <li id="key6" class="key white" data-key='F4'><span>F</span></li>
-        <li id="key7" class="key black" data-key='F#4'><span>F&sharp; G&flat;</span></li>
-        <li id="key8" class="key white" data-key='G4'><span>G</span></li>
-        <li id="key9" class="key black" data-key='G#4'><span>G&sharp; A&flat;</span></li>
-        <li id="key10" class="key white" data-key='A4'><span id="key10">A</span></li>
-        <li id="key11" class="key black" data-key='A#4'><span>A&sharp; B&flat;</span></li>
-        <li id="key12" class="key white" data-key='B4'><span>B</span></li>
-        <li id="key13" class="key white" data-key='C5'><span>C</span></li>
-        <li id="key14" class="key black" data-key='C#5'><span>C&sharp; D&flat;</span></li>
-        <li id="key15" class="key white" data-key='D5'><span>D</span></li>
-        <li id="key16" class="key black" data-key='D#5'><span>D&sharp; E&flat;</span></li>
-        <li id="key17" class="key white" data-key='E5'><span>E</span></li>
-        <li id="key18" class="key white" data-key='F5'><span>F</span></li>
-        <li id="key19" class="key black" data-key='F#5'><span>F&sharp; G&flat;</span></li>
-        <li id="key20" class="key white" data-key='G5'><span>G</span></li>
-        <li id="key21" class="key black" data-key='G#5'><span>G&sharp; A&flat;</span></li>
-        <li id="key22" class="key white" data-key='A5'><span>A</span></li>
-        <li id="key23" class="key black" data-key='A#5'><span>A&sharp; B&flat;</span></li>
-        <li id="key24" class="key white" data-key='B5'><span>B</span></li>
-      </ul>
-    </div>
+      <div class="column keys-checkbox">
+        <span>Show Notation</span><input type="checkbox" checked>
+      </div>
+      <div class="column notation-selection">
+        <span>Notation</span>
+        <select name="notation" id="notation">
+          <option value="letters">Letters</option>
+          <option value="scale-degree">Scale Degree</option>
+          <option value="solfege">Solfege</option>
+        </select>
+      </div>
+      <div class="column tonic-selection">
+        <span>Tonic</span>
+        <select name="tonic" id="tonic">
+          <option value="C">C</option>
+          <optgroup label="Sharp Keys">
+            <option value="G">G</option>
+            <option value="D">D</option>
+            <option value="A">A</option>
+            <option value="E">E</option>
+            <option value="B">B</option>
+            <option value="F#">F&sharp;</option>
+          </optgroup>
+          <optgroup label="Flat Keys">
+            <option value="F">F</option>
+            <option value="Bb">B&flat;</option>
+            <option value="Eb">E&flat;</option>
+            <option value="Ab">A&flat;</option>
+            <option value="Db">D&flat;</option>
+            <option value="Gb">G&flat;</option>
+          </optgroup>
+        </select>
+      </div>
+      <div class="column octaves-checkbox">
+        <span>Display 2nd Octave</span><input type="checkbox" checked>
+      </div>
+    </header>
+    <ul class="piano-keys">
+      <li id="key1" class="key white" data-key='C4'><span>C</span></li>
+      <li id="key2" class="key black" data-key='C#4'><span>C&sharp; D&flat;</span></li>
+      <li id="key3" class="key white" data-key='D4'><span>D</span></li>
+      <li id="key4" class="key black" data-key='D#4'><span>D&sharp; E&flat;</span></li>
+      <li id="key5" class="key white" data-key='E4'><span>E</span></li>
+      <li id="key6" class="key white" data-key='F4'><span>F</span></li>
+      <li id="key7" class="key black" data-key='F#4'><span>F&sharp; G&flat;</span></li>
+      <li id="key8" class="key white" data-key='G4'><span>G</span></li>
+      <li id="key9" class="key black" data-key='G#4'><span>G&sharp; A&flat;</span></li>
+      <li id="key10" class="key white" data-key='A4'><span id="key10">A</span></li>
+      <li id="key11" class="key black" data-key='A#4'><span>A&sharp; B&flat;</span></li>
+      <li id="key12" class="key white" data-key='B4'><span>B</span></li>
+      <li id="key13" class="key white" data-key='C5'><span>C</span></li>
+      <li id="key14" class="key black" data-key='C#5'><span>C&sharp; D&flat;</span></li>
+      <li id="key15" class="key white" data-key='D5'><span>D</span></li>
+      <li id="key16" class="key black" data-key='D#5'><span>D&sharp; E&flat;</span></li>
+      <li id="key17" class="key white" data-key='E5'><span>E</span></li>
+      <li id="key18" class="key white" data-key='F5'><span>F</span></li>
+      <li id="key19" class="key black" data-key='F#5'><span>F&sharp; G&flat;</span></li>
+      <li id="key20" class="key white" data-key='G5'><span>G</span></li>
+      <li id="key21" class="key black" data-key='G#5'><span>G&sharp; A&flat;</span></li>
+      <li id="key22" class="key white" data-key='A5'><span>A</span></li>
+      <li id="key23" class="key black" data-key='A#5'><span>A&sharp; B&flat;</span></li>
+      <li id="key24" class="key white remove" data-key='B5'><span>B</span></li>
+      <li id="key25" class="key white remove" data-key='C6'><span>C</span></li>
+      <li id="key26" class="key black remove" data-key='C#6'><span>C&sharp; D&flat;</span></li>
+      <li id="key27" class="key white remove" data-key='D6'><span>D</span></li>
+      <li id="key28" class="key black remove" data-key='D#6'><span>D&sharp; E&flat;</span></li>
+      <li id="key29" class="key white remove" data-key='E6'><span>E</span></li>
+      <li id="key30" class="key white remove" data-key='F6'><span>F</span></li>
+      <li id="key31" class="key black remove" data-key='F#6'><span>F&sharp; G&flat;</span></li>
+      <li id="key32" class="key white remove" data-key='G6'><span>G</span></li>
+      <li id="key33" class="key black remove" data-key='G#6'><span>G&sharp; A&flat;</span></li>
+      <li id="key34" class="key white remove" data-key='A6'><span>A</span></li>
+      <li id="key35" class="key black remove" data-key='A#6'><span>A&sharp; B&flat;</span></li>
+    </ul>
+  </div>
 
-  </body>
+</body>
+
 </html>

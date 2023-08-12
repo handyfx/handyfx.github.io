@@ -162,9 +162,9 @@ header input {
   .piano-keys {
     margin-top: 20px;
   }
-  .piano-keys .key:where(:nth-child(9), :nth-child(10)) {
+  /* .piano-keys .key:where(:nth-child(9), :nth-child(10)) {
     display: none;
-  }
+  } */
   .piano-keys .black {
     height: 100px;
     width: 40px;
@@ -176,13 +176,23 @@ header input {
   }
 }
 
-@media screen and (max-width: 615px) {
-  .piano-keys .key:nth-child(13),
-  .piano-keys .key:nth-child(14),
-  .piano-keys .key:nth-child(15),
-  .piano-keys .key:nth-child(16),
-  .piano-keys .key :nth-child(17) {
+@media screen and (max-width: 1060px) {
+  #key13,
+  #key14,
+  #key15,
+  #key16,
+  #key17,
+  #key18,
+  #key19,
+  #key20,
+  #key21,
+  #key22,
+  #key23,
+  #key24 {
     display: none;
+  }
+  .octaves-checkbox {
+    display: none !important;
   }
   .piano-keys .white {
     width: 50px;
