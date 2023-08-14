@@ -92,6 +92,11 @@ header input {
   left: 35px;
   background: #fff;
 }
+.piano {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .piano-keys {
   display: flex;
   list-style: none;
