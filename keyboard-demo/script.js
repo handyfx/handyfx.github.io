@@ -3,18 +3,16 @@ const pianoKeys = document.querySelectorAll(".piano-keys .key"),
     keysCheckbox = document.querySelector(".keys-checkbox input"),
     octavesCheckbox = document.querySelector(".octaves-checkbox input"),
     notationSelection = document.querySelector(".notation-selection"),
+    scaleSelection = document.querySelector(".scale-selection"),
     tonicSelection = document.querySelector(".tonic-selection");
 
 const notations = {
-    'letters': ['C', 'C&sharp;<br>D&flat;', 'D', 'D&sharp;<br>E&flat;', 'E', 'F', 'F&sharp;<br>G&flat;', 'G', 'G&sharp;<br>A&flat;', 'A', 'A&sharp;<br>B&flat;', 'B', 'C', 'C&sharp;<br>D&flat;', 'D', 'D&sharp;<br>E&flat;', 'E', 'F', 'F&sharp;<br>G&flat;', 'G', 'G&sharp;<br>A&flat;', 'A', 'A&sharp;<br>B&flat;', 'B'],
-    'scale-degree': ['1', '&sharp;1<br>&flat;2', '2', '&sharp;2<br>&flat;3', '3', '4', '&sharp;4<br>&flat;5', '5', '&sharp;5<br>&flat;6', '6', '&sharp;6<br>&flat;7', '7', '8', '&sharp;8<br>&flat;9', '9', '&sharp;9<br>&flat;10', '10', '11', '&sharp;11<br>&flat;12', '12', '&sharp;12<br>&flat;13', '13', '&sharp;13<br>&flat;14', '14'],
+    'letters': ['C', 'C&sharp;<br>D&flat;', 'D', 'D&sharp;<br>E&flat;', 'E', 'F', 'F&sharp;<br>G&flat;', 'G', 'G&sharp;<br>A&flat;', 'A', 'A&sharp;<br>B&flat;', 'B', 'C', 'C&sharp;<br>D&flat;', 'D', 'D&sharp;<br>E&flat;', 'E', 'F', 'F&sharp;<br>G&flat;', 'G', 'G&sharp;<br>A&flat;', 'A', 'A&sharp;<br>B&flat;', 'B', 'C', 'C&sharp;<br>D&flat;', 'D', 'D&sharp;<br>E&flat;', 'E', 'F', 'F&sharp;<br>G&flat;', 'G', 'G&sharp;<br>A&flat;', 'A', 'A&sharp;<br>B&flat;'],
+    'scale-degree': ['1', '&sharp;1<br>&flat;2', '2', '&sharp;2<br>&flat;3', '3', '4', '&sharp;4<br>&flat;5', '5', '&sharp;5<br>&flat;6', '6', '&sharp;6<br>&flat;7', '7', '1', '&sharp;1<br>&flat;2', '2', '&sharp;2<br>&flat;3', '3', '4', '&sharp;4<br>&flat;5', '5', '&sharp;5<br>&flat;6', '6', '&sharp;6<br>&flat;7', '7'],
     'solfege': ['do', 'di<br>ra', 're', 'ri<br>me', 'mi', 'fa', 'fi<br>re', 'sol', 'si<br>le', 'la', 'li<br>te', 'ti', 'do', 'di<br>ra', 're', 'ri<br>me', 'mi', 'fa', 'fi<br>re', 'sol', 'si<br>le', 'la', 'li<br>te', 'ti'],
 },
     keys = {
         'C': {
-            'letters': ['C', 'C&sharp;<br>D&flat;', 'D', 'D&sharp;<br>E&flat;', 'E', 'F', 'F&sharp;<br>G&flat;', 'G', 'G&sharp;<br>A&flat;', 'A', 'A&sharp;<br>B&flat;', 'B', 'C', 'C&sharp;<br>D&flat;', 'D', 'D&sharp;<br>E&flat;', 'E', 'F', 'F&sharp;<br>G&flat;', 'G', 'G&sharp;<br>A&flat;', 'A', 'A&sharp;<br>B&flat;', 'B'],
-            'solfege': ['do', 'di<br>ra', 're', 'ri<br>me', 'mi', 'fa', 'fi<br>re', 'sol', 'si<br>le', 'la', 'li<br>te', 'ti', 'do', 'di<br>ra', 're', 'ri<br>me', 'mi', 'fa', 'fi<br>re', 'sol', 'si<br>le', 'la', 'li<br>te', 'ti'],
-            'scale-degree': ['1', '&sharp;1<br>&flat;2', '2', '&sharp;2<br>&flat;3', '3', '4', '&sharp;4<br>&flat;5', '5', '&sharp;5<br>&flat;6', '6', '&sharp;6<br>&flat;7', '7', '8', '&sharp;8<br>&flat;9', '9', '&sharp;9<br>&flat;10', '10', '11', '&sharp;11<br>&flat;12', '12', '&sharp;12<br>&flat;13', '13', '&sharp;13<br>&flat;14', '14'],
             'start': 1,
             'end': 24
         },
@@ -66,11 +64,17 @@ const notations = {
             'start': 7,
             'end': 30
         }
-    }
+    },
+    scales = {
+        'None': [],
+        'Major': [0, 2, 4, 5, 7, 9, 11, 12, 14, 16, 17, 19, 21, 23],
+        'Minor': [0, 2, 3, 5, 7, 8, 10, 12, 14, 15, 17, 19, 20, 22]
+    };
 
 let allKeys = [],
     currentTonic = 'C',
-    currentNotation = 'letters';
+    currentNotation = 'letters',
+    currentScale = 'None';
 
 const synth = new Tone.Synth().toDestination();
 
@@ -116,15 +120,15 @@ const toggleSecondOctave = () => {
 
 const handleNotationChange = (event) => {
     currentNotation = event.target.value;
-    applyNotation();
+    refreshDisplay();
 }
 
 const applyNotation = () => {
     if (currentNotation === 'letters') {
         let counter = 1;
-        for (let notation of notations[currentNotation]) {
+        for (let index=0; index < notations['letters'].length; index++) {
             let keyId = "#key" + counter + " span";
-            document.querySelector(keyId).innerHTML = notation;
+            document.querySelector(keyId).innerHTML = notations['letters'][counter-1];
             counter++;
         }
     }
@@ -140,9 +144,12 @@ const applyNotation = () => {
 
 const handleTonicChange = (event) => {
     currentTonic = event.target.value;
+    refreshDisplay();
+}
 
-    let start = keys[event.target.value].start,
-        end = keys[event.target.value].end;
+const applyTonic = () => {
+    let start = keys[currentTonic].start,
+        end = keys[currentTonic].end;
 
     for (let index = 1; index < 36; index++) {
         let keyId = "#key" + index;
@@ -153,8 +160,31 @@ const handleTonicChange = (event) => {
             document.querySelector(keyId).classList.remove("remove");
         }
     }
+}
 
+const handleScaleChange = (event) => {
+    currentScale = event.target.value;
+    refreshDisplay();
+}
+
+const applyScale = () => {
+    removeScale();
+    for (let index=0; index < scales[currentScale].length; index++) {
+        let keyId = "#key" + (0 + keys[currentTonic].start + scales[currentScale][index]);
+        document.querySelector(keyId).classList.add("scale-member");
+    }
+}
+
+const removeScale = () => {
+    pianoKeys.forEach(key => {
+        key.classList.remove("scale-member");
+    });
+}
+
+const refreshDisplay = () => {
     applyNotation();
+    applyTonic();
+    applyScale();
 }
 
 const pressedKey = (e) => {
@@ -167,4 +197,7 @@ octavesCheckbox.addEventListener("click", toggleSecondOctave);
 //volumeSlider.addEventListener("input", handleVolume);
 notationSelection.addEventListener("change", handleNotationChange);
 tonicSelection.addEventListener("change", handleTonicChange);
+scaleSelection.addEventListener("change", handleScaleChange);
 document.addEventListener("keydown", pressedKey);
+
+refreshDisplay();

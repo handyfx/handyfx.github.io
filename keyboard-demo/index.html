@@ -18,14 +18,14 @@
           <span>Volume</span><input type="range" min="0" max="1" value="0.5" step="any">
         </div> -->
       <div class="column keys-checkbox">
-        <span>Show Notation</span><input type="checkbox" checked>
+        <span>Labels</span><input type="checkbox" checked>
       </div>
       <div class="column notation-selection">
-        <span>Notation</span>
+        <span>Label Type</span>
         <select name="notation" id="notation">
-          <option value="letters">Letters</option>
-          <option value="scale-degree">Scale Degree</option>
-          <option value="solfege">Solfege</option>
+          <option value="letters">Letter Names</option>
+          <option value="scale-degree">Scale Degrees</option>
+          <option value="solfege">Solfege Syllables</option>
         </select>
       </div>
       <div class="column tonic-selection">
@@ -50,8 +50,16 @@
           </optgroup>
         </select>
       </div>
+      <div class="column scale-selection">
+        <span>Scale</span>
+        <select name="scale" id="scale">
+          <option value="None">None</option>
+          <option value="Major">Major</option>
+          <option value="Minor">Minor</option>
+        </select>
+      </div>
       <div class="column octaves-checkbox">
-        <span>Display 2nd Octave</span><input type="checkbox" checked>
+        <span>Second Octave</span><input type="checkbox" checked>
       </div>
     </header>
     <ul class="piano-keys">

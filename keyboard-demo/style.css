@@ -135,6 +135,9 @@ header input {
   font-size: 1.13rem;
   text-align: center;
 }
+.piano-keys .key.scale-member span {
+  border: 3px solid red;
+}
 .piano-keys .key.hide span {
   display: none;
 }
