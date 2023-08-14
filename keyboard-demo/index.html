@@ -53,9 +53,34 @@
       <div class="column scale-selection">
         <span>Scale</span>
         <select name="scale" id="scale">
-          <option value="None">None</option>
-          <option value="Major">Major</option>
-          <option value="Minor">Minor</option>
+          <option value="none">None</option>
+          <optgroup label="Pentatonic Scales">
+            <option value="major-pentatonic">Major Pentatonic</option>
+            <option value="minor-pentatonic">Minor Pentatonic</option>
+          </optgroup>
+          <optgroup label="Other Minor Scales">
+            <option value="natural-minor">Natural Minor</option>
+            <option value="harmonic-minor">Harmonic Minor</option>
+            <option value="melodic-minor">Melodic Minor</option>
+          </optgroup>
+          <optgroup label="The Diatonic Modes">
+            <option value="ionian">Ionian (Major Scale)</option>
+            <option value="dorian">Dorian (Minor ↑6)</option>
+            <option value="phrygian">Phrygian (Minor ↓2)</option>
+            <option value="lydian">Lydian (Major ↑4)</option>
+            <option value="mixolydian">Mixolydian (Major ↓7)</option>
+            <option value="aeolian">Aeolian (Minor Scale)</option>
+            <option value="locrian">Locrian (Minor ↓2↓5)</option>
+          </optgroup>
+          <optgroup label="Jazz, Blues, & Exotic Scales">
+            <option value="blues">Blues Scale</option>
+            <option value="bebop-major">Bebop Major Scale</option>
+            <option value="bebop-dominant">Bebop Dominant Scale</option>
+            <option value="diminished">Diminished Scale</option>
+            <option value="acoustic">Acoustic Scale (Lydian Dominant)</option>
+            <option value="double-harmonic-major">Double Harmonic Major (Phrygian Major)</option>
+            <option value="superlocrian">Superlocrian (Altered Scale)</option>
+          </optgroup>
         </select>
       </div>
       <div class="column octaves-checkbox">

@@ -66,15 +66,34 @@ const notations = {
         }
     },
     scales = {
-        'None': [],
-        'Major': [0, 2, 4, 5, 7, 9, 11, 12, 14, 16, 17, 19, 21, 23],
-        'Minor': [0, 2, 3, 5, 7, 8, 10, 12, 14, 15, 17, 19, 20, 22]
+        // 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24
+        // 1   2   3 4   5   6    7  1     2     3  4     5     6     7  1
+        'none': [],
+        'major-pentatonic': [0, 2, 4, 7, 9, 12, 14, 16, 19, 21],
+        'minor-pentatonic': [0, 3, 5, 7, 10, 12, 15, 17, 19, 22],
+        'natural-minor': [0, 2, 3, 5, 7, 8, 10, 12, 14, 15, 17, 19, 20, 22],
+        'harmonic-minor': [0, 2, 3, 5, 7, 8, 11, 12, 14, 15, 17, 19, 20, 23],
+        'melodic-minor': [0, 2, 3, 5, 7, 9, 11, 12, 14, 15, 17, 19, 21, 23],
+        'ionian': [0, 2, 4, 5, 7, 9, 11, 12, 14, 16, 17, 19, 21, 23],
+        'dorian': [0, 2, 3, 5, 7, 9, 10, 12, 14, 15, 17, 19, 21, 22],
+        'phrygian': [0, 1, 3, 5, 7, 8, 10, 12, 13, 15, 17, 19, 20, 22],
+        'lydian': [0, 2, 4, 6, 7, 9, 11, 12, 14, 16, 18, 19, 21, 23],
+        'mixolydian': [0, 2, 4, 5, 7, 9, 10, 12, 14, 16, 17, 19, 21, 22],
+        'aeolian': [0, 2, 3, 5, 7, 8, 10, 12, 14, 15, 17, 19, 20, 22],
+        'locrian': [0, 1, 3, 5, 6, 8, 10, 12, 13, 15, 17, 18, 20, 22],
+        'blues': [0, 3, 5, 6, 7, 10, 12, 15, 17, 18, 19, 22],
+        'bebop-major': [0, 2, 4, 5, 7, 8, 9, 11, 12, 14, 16, 17, 19, 20, 21, 23],
+        'bebop-dominant': [0, 2, 4, 5, 7, 9, 10, 11, 12, 14, 16, 17, 19, 21, 22, 23],
+        'diminished': [0, 2, 3, 5, 6, 8, 9, 10, 12, 14, 15, 17, 18, 20, 21, 22],
+        'acoustic': [0, 2, 4, 6, 7, 9, 10, 12, 14, 16, 18, 19, 21, 22],
+        'double-harmonic-major': [0, 1, 4, 5, 7, 8, 11, 12, 13, 16, 17, 19, 20, 23],
+        'superlocrian': [0, 1, 3, 4, 6, 8, 10, 12, 13, 15, 16, 18, 20, 22],
     };
 
 let allKeys = [],
     currentTonic = 'C',
     currentNotation = 'letters',
-    currentScale = 'None';
+    currentScale = 'none';
 
 const synth = new Tone.Synth().toDestination();
 
@@ -126,15 +145,15 @@ const handleNotationChange = (event) => {
 const applyNotation = () => {
     if (currentNotation === 'letters') {
         let counter = 1;
-        for (let index=0; index < notations['letters'].length; index++) {
+        for (let index = 0; index < notations['letters'].length; index++) {
             let keyId = "#key" + counter + " span";
-            document.querySelector(keyId).innerHTML = notations['letters'][counter-1];
+            document.querySelector(keyId).innerHTML = notations['letters'][counter - 1];
             counter++;
         }
     }
     else {
         let counter = 0;
-        for (let index=keys[currentTonic].start; index<keys[currentTonic].end + 1; index++) {
+        for (let index = keys[currentTonic].start; index < keys[currentTonic].end + 1; index++) {
             let keyId = "#key" + index + " span";
             document.querySelector(keyId).innerHTML = notations[currentNotation][counter];
             counter++;
@@ -169,7 +188,7 @@ const handleScaleChange = (event) => {
 
 const applyScale = () => {
     removeScale();
-    for (let index=0; index < scales[currentScale].length; index++) {
+    for (let index = 0; index < scales[currentScale].length; index++) {
         let keyId = "#key" + (0 + keys[currentTonic].start + scales[currentScale][index]);
         document.querySelector(keyId).classList.add("scale-member");
     }
